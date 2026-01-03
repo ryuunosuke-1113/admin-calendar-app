@@ -1,59 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Admin Calendar App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Laravel + FullCalendar を使った **管理画面向けアプリケーション**です。  
+ログイン認証付きで、お知らせ管理と個人用カレンダー機能を備えています。
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ 主な機能
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔐 認証
+- Laravel Breeze を使用
+- ログイン必須の管理画面
+- 未ログイン時は `/admin/*` にアクセス不可
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+### 📰 お知らせ管理（管理画面）
+- お知らせの一覧表示
+- 作成 / 編集 / 削除
+- 詳細表示
+- 重要度（1〜5）設定
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📅 個人カレンダー
+- FullCalendar を使用
+- ログインユーザーごとに予定を管理
+- 予定の
+  - 追加
+  - 詳細表示
+  - 編集
+  - 削除
+- モーダルUIで操作可能
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🖥️ 使用技術
 
-### Premium Partners
+- Laravel
+- PHP 8.x
+- MySQL
+- Laravel Breeze
+- Blade
+- Vite
+- FullCalendar
+- JavaScript
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 📂 ディレクトリ構成（抜粋）
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+app/
+└ Http/Controllers/Admin
+├ EventController.php
+└ NewsController.php
 
-## Code of Conduct
+resources/
+├ views/
+│ ├ layouts/admin.blade.php
+│ └ admin/calendar.blade.php
+└ js/
+└ admin-calendar.js
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+routes/
+└ web.php
 
-## Security Vulnerabilities
+yaml
+コードをコピーする
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🚀 セットアップ手順（ローカル）
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1️⃣ リポジトリをクローン
+```bash
+git clone https://github.com/【GitHubユーザー名】/【リポジトリ名】.git
+cd 【リポジトリ名】
+2️⃣ PHP 依存関係をインストール
+bash
+コードをコピーする
+composer install
+3️⃣ フロントエンド依存関係をインストール
+bash
+コードをコピーする
+npm install
+4️⃣ 環境ファイルを作成
+bash
+コードをコピーする
+cp .env.example .env
+php artisan key:generate
+※ .env 内の DB接続情報 を自分の環境に合わせて設定してください。
+
+5️⃣ データベース準備
+bash
+コードをコピーする
+php artisan migrate
+6️⃣ サーバー起動
+bash
+コードをコピーする
+php artisan serve
+別ターミナルで：
+
+bash
+コードをコピーする
+npm run dev
+7️⃣ ブラウザでアクセス
+text
+コードをコピーする
+http://127.0.0.1:8000/login
+ログイン後：
+
+text
+コードをコピーする
+http://127.0.0.1:8000/admin/calendar
+🔒 セキュリティについて
+.env は GitHub に含めていません
+
+管理画面は auth ミドルウェアで保護しています
+
+本番公開時は APP_DEBUG=false を推奨します
+
+📝 補足
+本プロジェクトは 学習・ポートフォリオ用途を想定しています
+
+機能拡張（チーム共有、権限管理など）も可能な構成です
+
